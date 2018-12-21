@@ -124,8 +124,26 @@ public class ControlPanel extends JPanel {
 
         JButton polygonButton = new JButton(polygon);
         polygonButton.setBackground(Color.white);
+        polygonButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Start to Draw polygon");
+                super.mouseClicked(e);
+                control.polygonClickHandler();
+            }
+        });
+
         JButton polylineButton = new JButton(polyline);
         polylineButton.setBackground(Color.white);
+        polylineButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Start to Draw polyline");
+                super.mouseClicked(e);
+                control.polylineClickHandler();
+            }
+        });
+
         JButton textButton = new JButton(text);
         textButton.setBackground(Color.white);
         this.add(polygonButton);

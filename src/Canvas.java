@@ -48,7 +48,8 @@ public class Canvas extends JPanel {
             @Override
             public void mouseMoved(MouseEvent e) {
                 super.mouseMoved(e);
-
+                control.CanvasMoveHandler(e);
+                repaint();
             }
         };
 

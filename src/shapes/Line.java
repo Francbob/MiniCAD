@@ -12,12 +12,12 @@ public class Line extends Shape{
 //    private int Y1;
 //    private int X2;
 //    private int Y2;
-    private boolean selected = false;
-    private Line2D line;
-    private Point p1;
-    private Point p2;
-    private int strokeSize = 1;
-    private Color strokeColor = Color.black;
+     boolean selected = false;
+    Line2D line;
+    Point p1;
+    Point p2;
+     int strokeSize = 1;
+     Color strokeColor = Color.black;
 
 
     public Line(int x1, int y1, int x2, int y2){

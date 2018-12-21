@@ -26,7 +26,7 @@ public class Control {
                 Shape shape = curShape.getConstructor().newInstance();
                 this.model.add(shape);
                 // get into ready state
-                curState = curState.input(null, this.mode, CanvasAction.CANVAS_PRESS, shape);
+                    curState = curState.input(event, this.mode, CanvasAction.CANVAS_PRESS, shape);
             }catch (NoSuchMethodException|
                     IllegalAccessException|
                     InstantiationException|
@@ -74,6 +74,11 @@ public class Control {
         curState = curState.input(event, this.mode, CanvasAction.CANVAS_RELEASE, null);
     }
 
+    // Canvas Move Action
+    public void CanvasMoveHandler(MouseEvent event){
+        curState = curState.input(event, this.mode, CanvasAction.CANVAS_MOVE, null);
+    }
+
     public void LineClickHandler(){
         this.mode = Mode.DRAW;
         this.curShape = Line.class;
@@ -97,6 +102,16 @@ public class Control {
     public void fRectClickHandler(){
         this.mode = Mode.DRAW;
         this.curShape = FilledRect.class;
+    }
+
+    public void polylineClickHandler(){
+        this.mode = Mode.DRAW;
+        this.curShape = Polyline.class;
+    }
+
+    public void polygonClickHandler(){
+        this.mode = Mode.DRAW;
+        this.curShape = Polygon.class;
     }
 
     public void trashClickHandler(){
