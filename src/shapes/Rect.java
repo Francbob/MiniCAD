@@ -13,13 +13,13 @@ public class Rect extends Shape{
 //    private int Y1;
 //    private int X2;
 //    private int Y2;
-    private boolean selected =  false;
-    private Rectangle2D rect;
+
+     boolean selected =  false;
+     Rectangle2D rect;
     private Point p1;
     private Point p2;
-    private int strokeSize = 1;
-    private Color strokeColor = Color.black;
-    private BasicStroke stroke = new BasicStroke(strokeSize);
+     int strokeSize = 1;
+     Color strokeColor = Color.black;
 
 //    public Rect(int x1, int y1, int x2, int y2){
 //        this.p1 = new Point(x1, y1);
@@ -44,7 +44,7 @@ public class Rect extends Shape{
 
     public void render(Graphics2D canvas){
         canvas.setColor(this.strokeColor);
-        canvas.setStroke(this.stroke);
+        canvas.setStroke(new BasicStroke(strokeSize));
         canvas.draw(this.rect);
         if (selected){
             canvas.setColor(Color.RED);
@@ -71,7 +71,6 @@ public class Rect extends Shape{
     public void setStokeSize(int delta){
         if (strokeSize + delta > 0){
             strokeSize += delta;
-            this.stroke = new BasicStroke(strokeSize);
         }
     }
     public void selected(){

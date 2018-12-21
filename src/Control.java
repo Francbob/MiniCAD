@@ -14,57 +14,64 @@ public class Control {
     public void setModel(Model model){
         this.model = model;
     }
+
+    public void SelectHandler(){
+        this.mode = Mode.SELECTED;
+    }
+
+    // Canvas Press Action
     public void CanvasPressHandler(MouseEvent event){
-        if (this.mode == mode.DRAW){
+        if (this.mode == Mode.DRAW){
             try {
                 Shape shape = curShape.getConstructor().newInstance();
                 this.model.add(shape);
                 // get into ready state
-                curState = curState.input(null, this.mode, true, shape);
+                curState = curState.input(null, this.mode, CanvasAction.CANVAS_PRESS, shape);
             }catch (NoSuchMethodException|
                     IllegalAccessException|
                     InstantiationException|
                     InvocationTargetException e){
                 e.printStackTrace();
             }
-            curState = curState.input(event, this.mode, true, selectedShape);
+//            curState = curState.input(event, this.mode, true, selectedShape);
             return;
         }
-        if (this.mode == mode.SELECTED){
+        if (this.mode == Mode.SELECTED || this.mode == Mode.DELETE){
             if (curState.getClass() == Selected.class){
-                curState = curState.input(event, this.mode, true, selectedShape);
+                curState = curState.input(event, this.mode, CanvasAction.CANVAS_PRESS, selectedShape);
                 return;
             }
+            // find the target shap
             boolean flag = false;
             for (Shape shape:model){
                 if (shape.isInBox(event.getPoint())){
-//                    if (curState.getClass() == Selected.class && !selectedShape.equals(shape)){
-//                        curState = curState.input(event, this.mode, true, null);
-//                        return;
-//                    }
+                    if (this.mode == Mode.DELETE){
+                        model.remove(shape);
+                        return;
+                    }
                     selectedShape = shape;
                     flag = true;
                     break;
                 }
             }
             if (flag){
-                curState = curState.input(event, this.mode, true, selectedShape);
+                curState = curState.input(event, mode, CanvasAction.CANVAS_PRESS, selectedShape);
+            } else {
+                curState = curState.input(event, mode, CanvasAction.CANVAS_PRESS, null);
             }
         }
 
     }
-    public void SelectHandler(){
-        this.mode = Mode.SELECTED;
-    }
 
+    // Canvas Drag Action
     public void CanvasDragHandler(MouseEvent event){
-        System.out.println("Drag begin!");
-            curState = curState.input(event, this.mode, false, null);
+        // System.out.println("Drag begin!");
+        curState = curState.input(event, this.mode, CanvasAction.CANVAS_DRAG, null);
     }
 
+    // Canvas Release Action
     public void CanvasReleaseHandler(MouseEvent event){
-        if (this.mode == mode.DRAW)
-            curState = curState.input(event, this.mode, true, null);
+        curState = curState.input(event, this.mode, CanvasAction.CANVAS_RELEASE, null);
     }
 
     public void LineClickHandler(){
@@ -82,8 +89,17 @@ public class Control {
         this.curShape = Ellipse.class;
     }
 
-    public void DragHandler(){
-
+    public void fEllipseClickHandler(){
+        this.mode = Mode.DRAW;
+        this.curShape = FilledEllipse.class;
     }
 
+    public void fRectClickHandler(){
+        this.mode = Mode.DRAW;
+        this.curShape = FilledRect.class;
+    }
+
+    public void trashClickHandler(){
+        this.mode = Mode.DELETE;
+    }
 }

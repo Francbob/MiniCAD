@@ -18,7 +18,6 @@ public class Line extends Shape{
     private Point p2;
     private int strokeSize = 1;
     private Color strokeColor = Color.black;
-    private BasicStroke stroke = new BasicStroke(strokeSize);
 
 
     public Line(int x1, int y1, int x2, int y2){
@@ -44,7 +43,7 @@ public class Line extends Shape{
 
     public void render(Graphics2D canvas){
         canvas.setColor(this.strokeColor);
-        canvas.setStroke(this.stroke);
+        canvas.setStroke(new BasicStroke(strokeSize));
         canvas.draw(this.line);
         if (selected){
             canvas.setColor(Color.RED);
@@ -68,7 +67,6 @@ public class Line extends Shape{
     public void setStokeSize(int delta){
         if (strokeSize + delta > 0){
             strokeSize += delta;
-            this.stroke = new BasicStroke(strokeSize);
         }
     }
     public void selected(){

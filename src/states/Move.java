@@ -16,13 +16,14 @@ public class Move extends State{
         this.begin = point;
     }
 
-    public State input(MouseEvent event, Mode mode, boolean click, Shape shape){
+    public State input(MouseEvent event, Mode mode, CanvasAction action, Shape shape){
         curShape.move((int)(event.getX()-begin.getX()), (int)(event.getY()-begin.getY()));
 
-        if (!click && mode == mode.SELECTED){
-
+        if (action == CanvasAction.CANVAS_DRAG && mode == Mode.SELECTED){
             return new Move(curShape, event.getPoint());
         }
-        return new Selected(curShape);
+        if (action == CanvasAction.CANVAS_RELEASE && mode == Mode.SELECTED)
+            return new Selected(curShape);
+        return this;
     }
 }

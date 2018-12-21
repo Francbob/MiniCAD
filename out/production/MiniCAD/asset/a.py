@@ -5,5 +5,5 @@ for img in [x for x in os.listdir('.') if os.path.isfile(x) and os.path.splitext
     if img != 'a.py':
         print(img)
         i = cv2.imread(os.path.join('.', img))
-        i = cv2.resize(i,(25,25))
+        i = cv2.resize(i,(30,30))
         cv2.imwrite(img,i)

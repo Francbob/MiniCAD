@@ -12,6 +12,9 @@ public class ControlPanel extends JPanel {
     private static Icon polygon;
     private static Icon select;
     private static Icon text;
+    private static Icon frect;
+    private static Icon fellipse;
+    private static Icon trash;
 
     ControlPanel(Control control){
         this.setBackground(Color.lightGray);
@@ -31,6 +34,34 @@ public class ControlPanel extends JPanel {
         });
         this.add(lineButton);
 
+        // Draw a frect
+        frect = new ImageIcon(getClass().getResource("/asset/frect.jpg"));
+        JButton frectButton = new JButton(frect);
+        frectButton.setBackground(Color.white);
+        frectButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Start to draw filled rectangle!");
+                super.mouseClicked(e);
+                control.fRectClickHandler();
+            }
+        });
+        this.add(frectButton);
+
+        // Draw a fellipse
+        fellipse = new ImageIcon(getClass().getResource("/asset/fellipse.jpg"));
+        JButton fEllipseButton = new JButton(fellipse);
+        fEllipseButton.setBackground(Color.white);
+        fEllipseButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Start to draw filled Ellipse!");
+                super.mouseClicked(e);
+                control.fEllipseClickHandler();
+            }
+        });
+        this.add(fEllipseButton);
+
         // Drow a Rectangle
         rect = new ImageIcon(getClass().getResource("/asset/rect.jpg"));
         JButton rectButton = new JButton(rect);
@@ -44,6 +75,20 @@ public class ControlPanel extends JPanel {
             }
         });
         this.add(rectButton);
+
+        // Drow a Rectangle
+        trash = new ImageIcon(getClass().getResource("/asset/trash.jpg"));
+        JButton trashButton = new JButton(trash);
+        trashButton.setBackground(Color.white);
+        trashButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Ready to Delete Images");
+                super.mouseClicked(e);
+                control.trashClickHandler();
+            }
+        });
+        this.add(trashButton);
 
         ellipse = new ImageIcon(getClass().getResource("/asset/ellipse.jpg"));
         JButton ellipseButton = new JButton(ellipse);
@@ -77,17 +122,14 @@ public class ControlPanel extends JPanel {
         text = new ImageIcon(getClass().getResource("/asset/text.jpg"));
 
 
-
         JButton polygonButton = new JButton(polygon);
         polygonButton.setBackground(Color.white);
         JButton polylineButton = new JButton(polyline);
         polylineButton.setBackground(Color.white);
         JButton textButton = new JButton(text);
         textButton.setBackground(Color.white);
-
-
-
         this.add(polygonButton);
+
         this.add(polylineButton);
         this.add(textButton);
 

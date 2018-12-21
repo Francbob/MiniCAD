@@ -12,13 +12,13 @@ public class Ready extends State{
         System.out.println("Enter Ready State!");
         this.curShape = shape;
     }
-    public State input(MouseEvent event, Mode mode, boolean click, Shape shape){
-        if (click && mode == Mode.DRAW){
+    public State input(MouseEvent event, Mode mode, CanvasAction action, Shape shape){
+        if (action == CanvasAction.CANVAS_DRAG && mode == Mode.DRAW){
             Point p = event.getPoint();
             curShape.setBegin(p.x, p.y);
             return new Working(this.curShape, p);
         }
-        if (click && mode == Mode.SELECTED){
+        if (action == CanvasAction.CANVAS_PRESS && mode == Mode.DRAW){
 
         }
         return this;

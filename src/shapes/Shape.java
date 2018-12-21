@@ -3,7 +3,7 @@ package shapes;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public abstract class Shape {
+public abstract class Shape implements java.io.Serializable {
 //    int width = 0;
 //    int height = 0;
 //    int X = 0;

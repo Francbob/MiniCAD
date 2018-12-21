@@ -16,9 +16,9 @@ public class Working extends State{
         this.begin = point;
     }
 
-    public State input(MouseEvent event, Mode mode, boolean click, Shape shape){
+    public State input(MouseEvent event, Mode mode, CanvasAction action, Shape shape){
         this.curShape.setEnd(event.getX(), event.getY());
-        if (click && mode == Mode.DRAW){
+        if (action == CanvasAction.CANVAS_RELEASE && mode == Mode.DRAW){
             return new Wait();
         }
         return this;
